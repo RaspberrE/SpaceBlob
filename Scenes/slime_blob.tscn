@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://v01l1y81sht4"]
+
+[ext_resource type="Texture2D" uid="uid://8cudvmrxrhfp" path="res://Assets/S blob anim basic.png" id="1_ekehp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0cqa"]
+atlas = ExtResource("1_ekehp")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8ovr"]
+atlas = ExtResource("1_ekehp")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtljt"]
+atlas = ExtResource("1_ekehp")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwcdn"]
+atlas = ExtResource("1_ekehp")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sie0b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0cqa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8ovr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mtljt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwcdn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_osmcr"]
+radius = 100.0
+
+[node name="SlimeBlob" type="Node2D"]
+
+[node name="SlimeBlobANIM" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_sie0b")
+autoplay = "default"
+
+[node name="Area2D" type="Area2D" parent="SlimeBlobANIM"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlimeBlobANIM/Area2D"]
+shape = SubResource("CircleShape2D_osmcr")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -103.0
+offset_top = -75.0
+offset_right = 102.0
+offset_bottom = -52.0
+text = "Press 'E' to take slime blob"

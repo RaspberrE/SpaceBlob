@@ -6,11 +6,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k2xiy"]
 size = Vector2(30, 30)
 
-[node name="Player" type="Node2D"]
+[node name="Blobby" type="Node2D"]
 
 [node name="PLAYER" type="CharacterBody2D" parent="."]
 position = Vector2(0, -37)
 script = ExtResource("1_1mr10")
+walk_speed = 300.0
 
 [node name="Sprite2D" type="Sprite2D" parent="PLAYER"]
 texture = ExtResource("2_hxf2j")
@@ -20,3 +21,6 @@ visible = false
 shape = SubResource("RectangleShape2D_k2xiy")
 
 [node name="Camera2D" type="Camera2D" parent="PLAYER"]
+zoom = Vector2(2, 2)
+process_callback = 0
+position_smoothing_enabled = true
