@@ -1,10 +1,158 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnictyb54wkje"]
+[gd_scene load_steps=18 format=3 uid="uid://bnictyb54wkje"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_1mr10"]
 [ext_resource type="Texture2D" uid="uid://dgkld4c20ucno" path="res://Assets/Sprite-0001.png" id="2_hxf2j"]
+[ext_resource type="Texture2D" uid="uid://bd4bxml7wq7b5" path="res://Assets/HP.png" id="3_y2hi6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k2xiy"]
 size = Vector2(30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_re0at"]
+atlas = ExtResource("3_y2hi6")
+region = Rect2(0, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfxwl"]
+atlas = ExtResource("3_y2hi6")
+region = Rect2(0, 32, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0pt3"]
+atlas = ExtResource("3_y2hi6")
+region = Rect2(0, 64, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6m1pc"]
+atlas = ExtResource("3_y2hi6")
+region = Rect2(0, 96, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htghv"]
+atlas = ExtResource("3_y2hi6")
+region = Rect2(0, 128, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjyvh"]
+atlas = ExtResource("3_y2hi6")
+region = Rect2(0, 160, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2wah"]
+atlas = ExtResource("3_y2hi6")
+region = Rect2(0, 192, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dppct"]
+atlas = ExtResource("3_y2hi6")
+region = Rect2(0, 224, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_341e7"]
+atlas = ExtResource("3_y2hi6")
+region = Rect2(0, 256, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0w2p3"]
+atlas = ExtResource("3_y2hi6")
+region = Rect2(0, 288, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51ors"]
+atlas = ExtResource("3_y2hi6")
+region = Rect2(0, 320, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rn43i"]
+atlas = ExtResource("3_y2hi6")
+region = Rect2(0, 352, 96, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v63r1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_re0at")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gfxwl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0pt3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6m1pc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_htghv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjyvh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2wah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dppct")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_341e7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0w2p3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_51ors")
+}],
+"loop": true,
+"name": &"10 max hp",
+"speed": 1.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"11 max hp",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"12 max hp",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"13 max hp",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"14 max hp",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"15 max hp",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"16 max hp",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"17 max hp",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"18 max hp",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"19 max hp",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"20 max hp",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rn43i")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}]
 
 [node name="Blobby" type="Node2D"]
 
@@ -24,3 +172,10 @@ shape = SubResource("RectangleShape2D_k2xiy")
 zoom = Vector2(2, 2)
 process_callback = 0
 position_smoothing_enabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PLAYER/Camera2D"]
+position = Vector2(239, 145)
+sprite_frames = SubResource("SpriteFrames_v63r1")
+animation = &"10 max hp"
+frame = 7
+frame_progress = 0.591705
