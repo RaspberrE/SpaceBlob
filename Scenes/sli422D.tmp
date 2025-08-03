@@ -61,6 +61,5 @@ offset_right = 102.0
 offset_bottom = -52.0
 text = "Press 'E' to take slime blob"
 
-[connection signal="add_blob" from="." to="." method="_on_add_blob"]
 [connection signal="body_entered" from="SlimeBlobANIM/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="SlimeBlobANIM/Area2D" to="." method="_on_area_2d_body_exited"]

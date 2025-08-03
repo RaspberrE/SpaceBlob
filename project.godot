@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/Main.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://Assets/icon.svg"
 
+[autoload]
+
+Globalvars="*res://Scripts/globalvars.gd"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
