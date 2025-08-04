@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://v01l1y81sht4"]
 
-[ext_resource type="Script" path="res://Scenes/slime_blob.gd" id="1_1n51h"]
+[ext_resource type="Script" path="res://Scripts/slime_blob.gd" id="1_1n51h"]
 [ext_resource type="Texture2D" uid="uid://8cudvmrxrhfp" path="res://Assets/S blob anim basic.png" id="1_ekehp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n0cqa"]

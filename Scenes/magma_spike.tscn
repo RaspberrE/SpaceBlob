@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://b30cvq6rsw3g7"]
+
+[ext_resource type="Texture2D" uid="uid://btr3gj8lgtuy1" path="res://Assets/interactables.png" id="1_bjysr"]
+
+[node name="Magma Spike" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("1_bjysr")
+hframes = 7
+vframes = 7
+frame = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D/CollisionShape2D"]
+polygon = PackedVector2Array(0, -16, -15, 15, 15, 15)

@@ -5,6 +5,7 @@ var health = Vector2(10, 10) #health.x is the amount of health, meanwhile health
 var gold = 0
 var amethyst = 0
 var text = false
+var keys = 0
 var text_contents = "*testing text"
 
 # Called when the node enters the scene tree for the first time.

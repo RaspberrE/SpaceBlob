@@ -1,10 +1,13 @@
-[gd_scene load_steps=185 format=3 uid="uid://bnictyb54wkje"]
+[gd_scene load_steps=191 format=3 uid="uid://bnictyb54wkje"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_1mr10"]
 [ext_resource type="Texture2D" uid="uid://dgkld4c20ucno" path="res://Assets/Sprite-0001.png" id="2_hxf2j"]
 [ext_resource type="Texture2D" uid="uid://bd4bxml7wq7b5" path="res://Assets/HP.png" id="3_y2hi6"]
-[ext_resource type="Script" path="res://Scenes/HpBar.gd" id="4_0qfx8"]
-[ext_resource type="Script" path="res://Scenes/Textbox.gd" id="5_wwbbi"]
+[ext_resource type="Script" path="res://Scripts/HpBar.gd" id="4_0qfx8"]
+[ext_resource type="Script" path="res://Scripts/Textbox.gd" id="5_wwbbi"]
+[ext_resource type="Script" path="res://Scripts/keyCount.gd" id="6_io3qf"]
+[ext_resource type="Script" path="res://Scripts/GoldCount.gd" id="7_70jo5"]
+[ext_resource type="Script" path="res://Scenes/slimeBlobCount.gd" id="8_d1nmo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k2xiy"]
 size = Vector2(30, 30)
@@ -1311,6 +1314,16 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_dvvcc"]
+font_size = 13
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_x0to3"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_po0ij"]
+font_color = Color(0, 0, 0, 1)
+
 [node name="Blobby" type="Node2D"]
 
 [node name="PLAYER" type="CharacterBody2D" parent="."]
@@ -1351,10 +1364,63 @@ script = ExtResource("5_wwbbi")
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
 z_index = 3
+layout_mode = 0
 offset_left = 18.0
 offset_top = 15.0
 offset_right = 1004.0
 offset_bottom = 197.0
 text = " "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="PLAYER/Camera2D/CanvasLayer"]
+offset_left = 1069.0
+offset_top = 594.0
+offset_right = 1148.0
+offset_bottom = 634.0
+script = ExtResource("6_io3qf")
+
+[node name="Label" type="Label" parent="PLAYER/Camera2D/CanvasLayer/ColorRect2"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 77.0
+offset_bottom = 39.0
+text = "🗝️: "
+label_settings = SubResource("LabelSettings_dvvcc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect3" type="ColorRect" parent="PLAYER/Camera2D/CanvasLayer"]
+offset_left = 1068.0
+offset_top = 550.0
+offset_right = 1147.0
+offset_bottom = 590.0
+script = ExtResource("7_70jo5")
+
+[node name="Label" type="Label" parent="PLAYER/Camera2D/CanvasLayer/ColorRect3"]
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 78.0
+offset_bottom = 39.0
+text = "💰:"
+label_settings = SubResource("LabelSettings_x0to3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect4" type="ColorRect" parent="PLAYER/Camera2D/CanvasLayer"]
+offset_left = 1069.0
+offset_top = 510.0
+offset_right = 1146.0
+offset_bottom = 545.0
+script = ExtResource("8_d1nmo")
+
+[node name="Label" type="Label" parent="PLAYER/Camera2D/CanvasLayer/ColorRect4"]
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 76.0
+offset_bottom = 34.0
+text = "🟢:"
+label_settings = SubResource("LabelSettings_po0ij")
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cqw3dif2jc7pi"]
+
+[ext_resource type="Texture2D" uid="uid://btr3gj8lgtuy1" path="res://Assets/interactables.png" id="1_f72jp"]
+[ext_resource type="Script" path="res://Scripts/lock_block.gd" id="1_xt0ya"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gyamn"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h74hq"]
+size = Vector2(34, 34)
+
+[node name="Lockblock" type="Node2D"]
+script = ExtResource("1_xt0ya")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_f72jp")
+hframes = 7
+vframes = 7
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D"]
+shape = SubResource("RectangleShape2D_gyamn")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D/StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D/Area2D"]
+shape = SubResource("RectangleShape2D_h74hq")
+
+[connection signal="body_entered" from="Sprite2D/StaticBody2D/Area2D" to="." method="_on_area_2d_body_entered"]
