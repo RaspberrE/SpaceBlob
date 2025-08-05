@@ -9,4 +9,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	pass
+	if $".".animation != str(Globalvars.health.y):
+		$".".play(str(Globalvars.health.y))
+		$".".pause()
+	if $".".frame != int(Globalvars.health.x):
+		$".".frame = int(Globalvars.health.x)

@@ -7,6 +7,10 @@ var amethyst = 0
 var text = false
 var keys = 0
 var text_contents = "*testing text"
+var slime_form = "bunny"
+var blob_menu_select = "Bunny"
+var invincibility = Vector2(0,1) #x = starting, y= finished
+var no_grav = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

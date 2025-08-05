@@ -13,6 +13,10 @@ func _process(_delta: float) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "PLAYER":
-		if Globalvars.keys > 0:
-			Globalvars.keys -= 1
-			queue_free()
+		Globalvars.no_grav = true
+
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	if body.name == "PLAYER":
+		Globalvars.no_grav = false
+		print("gravity enabled")

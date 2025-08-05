@@ -13,7 +13,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Interact") and player_in_area == true and Globalvars.text == false:
 		$Label.visible = false
-		Globalvars.text_contents = "A for left, D for right"
+		Globalvars.text_contents = "Press 'A' to move left, and press D to move right! Press 'Space' to jump! (You will be able to move differently later in the game!)"
 		Globalvars.text = true
 	else:
 		pass

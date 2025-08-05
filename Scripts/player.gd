@@ -8,14 +8,19 @@ extends CharacterBody2D
 @export_range(0,1) var decelerate_on_jump_release = 0.5
 
 func _physics_process(delta: float) -> void:
+	var direction := Input.get_axis("Left", "Right")
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
 	# Handle jump.
 
-	if Input.is_action_just_pressed("Jump") and(is_on_floor() or is_on_wall()):
-		velocity.y = jump_force
+	if Input.is_action_just_pressed("Jump"):
+		if is_on_floor():
+			velocity.y = jump_force
+		elif Globalvars.no_grav == true or(is_on_wall() and Globalvars.slime_form == "stickman"):
+			velocity.y = jump_force
+		
 
 	if Input.is_action_just_released("Jump") and velocity.y < 0:
 		velocity.y *= decelerate_on_jump_release
@@ -23,15 +28,19 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	
 	var speed 
-	if Input.is_action_pressed("Run"):
+	if Input.is_action_pressed("Run") and Globalvars.slime_form=="stickman":
 		speed = run_speed
 	else:
 		speed = walk_speed
 	
-	var direction := Input.get_axis("Left", "Right")
+	if direction == 1:
+		$Sprite2D.flip_h = true
+	elif direction == -1:
+		$Sprite2D.flip_h = false 
+	
 	if direction:
 		velocity.x = move_toward(velocity.x, direction*speed, speed * acceleration) #move toward changes the velocity.x of the char by the third value, until is reaches the second value, making the charachter move from the 0 velocity to the velocity with direction gradually (ts applies acceleration ofc)
 	else:
 		velocity.x = move_toward(velocity.x, 0, walk_speed * deceleration)
-
+		
 	move_and_slide()

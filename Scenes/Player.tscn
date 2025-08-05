@@ -1,16 +1,16 @@
-[gd_scene load_steps=191 format=3 uid="uid://bnictyb54wkje"]
+[gd_scene load_steps=197 format=3 uid="uid://bnictyb54wkje"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_1mr10"]
-[ext_resource type="Texture2D" uid="uid://dgkld4c20ucno" path="res://Assets/Sprite-0001.png" id="2_hxf2j"]
+[ext_resource type="Texture2D" uid="uid://demj2tjs00m8k" path="res://Assets/Bunny_form.png" id="2_wjnbf"]
+[ext_resource type="Script" path="res://Scripts/invincibilityFrames.gd" id="3_hjoks"]
 [ext_resource type="Texture2D" uid="uid://bd4bxml7wq7b5" path="res://Assets/HP.png" id="3_y2hi6"]
 [ext_resource type="Script" path="res://Scripts/HpBar.gd" id="4_0qfx8"]
 [ext_resource type="Script" path="res://Scripts/Textbox.gd" id="5_wwbbi"]
 [ext_resource type="Script" path="res://Scripts/keyCount.gd" id="6_io3qf"]
 [ext_resource type="Script" path="res://Scripts/GoldCount.gd" id="7_70jo5"]
-[ext_resource type="Script" path="res://Scenes/slimeBlobCount.gd" id="8_d1nmo"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k2xiy"]
-size = Vector2(30, 30)
+[ext_resource type="Script" path="res://Scripts/slimeBlobCount.gd" id="8_d1nmo"]
+[ext_resource type="Script" path="res://Scripts/blob_spend_menu.gd" id="10_4bxgw"]
+[ext_resource type="Texture2D" uid="uid://4eo3d7p25bbj" path="res://Assets/XButton.png" id="11_ucpg8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6bjfm"]
 atlas = ExtResource("3_y2hi6")
@@ -1314,6 +1314,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_aculf"]
+font_color = Color(0, 0, 0, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_dvvcc"]
 font_size = 13
 font_color = Color(0, 0, 0, 1)
@@ -1324,6 +1327,15 @@ font_color = Color(0, 0, 0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_po0ij"]
 font_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_0j51w"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bedao"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rrmhj"]
+font_color = Color(0.840674, 1, 0.824239, 1)
+
 [node name="Blobby" type="Node2D"]
 
 [node name="PLAYER" type="CharacterBody2D" parent="."]
@@ -1333,11 +1345,12 @@ walk_speed = 300.0
 
 [node name="Sprite2D" type="Sprite2D" parent="PLAYER"]
 z_index = 1
-texture = ExtResource("2_hxf2j")
+texture = ExtResource("2_wjnbf")
+script = ExtResource("3_hjoks")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PLAYER"]
-visible = false
-shape = SubResource("RectangleShape2D_k2xiy")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PLAYER"]
+position = Vector2(0, 8)
+polygon = PackedVector2Array(-16, -7, -15, -7, 0, -7, 1, -7, 1, -3, 2, -3, 2, -2, 15, -2, 15, -1, 15, 7, 15, 8, -15, 8, -15, 7, -16, 7)
 
 [node name="Camera2D" type="Camera2D" parent="PLAYER"]
 zoom = Vector2(2, 2)
@@ -1352,7 +1365,8 @@ sprite_frames = SubResource("SpriteFrames_v63r1")
 animation = &"20"
 script = ExtResource("4_0qfx8")
 
-[node name="ColorRect" type="ColorRect" parent="PLAYER/Camera2D/CanvasLayer"]
+[node name="TextBox" type="ColorRect" parent="PLAYER/Camera2D/CanvasLayer"]
+visible = false
 z_index = 2
 offset_left = 39.0
 offset_top = 425.0
@@ -1360,7 +1374,7 @@ offset_right = 1060.0
 offset_bottom = 633.0
 script = ExtResource("5_wwbbi")
 
-[node name="Label" type="Label" parent="PLAYER/Camera2D/CanvasLayer/ColorRect"]
+[node name="Description" type="Label" parent="PLAYER/Camera2D/CanvasLayer/TextBox"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
 z_index = 3
@@ -1373,14 +1387,25 @@ text = " "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ColorRect2" type="ColorRect" parent="PLAYER/Camera2D/CanvasLayer"]
+[node name="Phrase" type="Label" parent="PLAYER/Camera2D/CanvasLayer/TextBox"]
+layout_mode = 0
+offset_left = 834.0
+offset_top = 182.0
+offset_right = 1018.0
+offset_bottom = 205.0
+text = "(Click to close/next box)"
+label_settings = SubResource("LabelSettings_aculf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Keys" type="ColorRect" parent="PLAYER/Camera2D/CanvasLayer"]
 offset_left = 1069.0
 offset_top = 594.0
 offset_right = 1148.0
 offset_bottom = 634.0
 script = ExtResource("6_io3qf")
 
-[node name="Label" type="Label" parent="PLAYER/Camera2D/CanvasLayer/ColorRect2"]
+[node name="Label" type="Label" parent="PLAYER/Camera2D/CanvasLayer/Keys"]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 2.0
@@ -1391,14 +1416,15 @@ label_settings = SubResource("LabelSettings_dvvcc")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ColorRect3" type="ColorRect" parent="PLAYER/Camera2D/CanvasLayer"]
+[node name="Money" type="ColorRect" parent="PLAYER/Camera2D/CanvasLayer"]
 offset_left = 1068.0
 offset_top = 550.0
 offset_right = 1147.0
 offset_bottom = 590.0
 script = ExtResource("7_70jo5")
 
-[node name="Label" type="Label" parent="PLAYER/Camera2D/CanvasLayer/ColorRect3"]
+[node name="Label" type="Label" parent="PLAYER/Camera2D/CanvasLayer/Money"]
+layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
 offset_right = 78.0
@@ -1408,14 +1434,15 @@ label_settings = SubResource("LabelSettings_x0to3")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ColorRect4" type="ColorRect" parent="PLAYER/Camera2D/CanvasLayer"]
+[node name="BlobAmount" type="ColorRect" parent="PLAYER/Camera2D/CanvasLayer"]
 offset_left = 1069.0
 offset_top = 510.0
 offset_right = 1146.0
 offset_bottom = 545.0
 script = ExtResource("8_d1nmo")
 
-[node name="Label" type="Label" parent="PLAYER/Camera2D/CanvasLayer/ColorRect4"]
+[node name="Label" type="Label" parent="PLAYER/Camera2D/CanvasLayer/BlobAmount"]
+layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
 offset_right = 76.0
@@ -1424,3 +1451,144 @@ text = "🟢:"
 label_settings = SubResource("LabelSettings_po0ij")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="BlobSpendMenu" type="ColorRect" parent="PLAYER/Camera2D/CanvasLayer"]
+offset_left = 234.0
+offset_right = 899.0
+offset_bottom = 648.0
+script = ExtResource("10_4bxgw")
+
+[node name="CloseMenuButton" type="Button" parent="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu"]
+offset_left = 7.0
+offset_top = 4.0
+offset_right = 47.0
+offset_bottom = 44.0
+icon = ExtResource("11_ucpg8")
+flat = true
+
+[node name="phrase" type="Label" parent="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 7.0
+offset_right = 418.0
+offset_bottom = 30.0
+text = "Spend your slime blobs! "
+label_settings = SubResource("LabelSettings_0j51w")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Scroll container" type="ScrollContainer" parent="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu"]
+clip_children = 2
+layout_mode = 0
+offset_left = 28.0
+offset_top = 75.0
+offset_right = 167.0
+offset_bottom = 578.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu/Scroll container"]
+layout_mode = 2
+
+[node name="Forms" type="Label" parent="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu/Scroll container/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Forms:"
+label_settings = SubResource("LabelSettings_bedao")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BunnyFormButton" type="Button" parent="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu/Scroll container/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "Bunny form"
+
+[node name="StickmanFormButton" type="Button" parent="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu/Scroll container/VBoxContainer"]
+layout_mode = 2
+text = "Stickman form"
+
+[node name="DetailsArea" type="ColorRect" parent="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu"]
+layout_mode = 0
+offset_left = 187.0
+offset_top = 58.0
+offset_right = 609.0
+offset_bottom = 586.0
+color = Color(0.458824, 0.458824, 0.458824, 1)
+
+[node name="FormName" type="Label" parent="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu/DetailsArea"]
+layout_mode = 0
+offset_left = 132.0
+offset_top = 1.0
+offset_right = 261.0
+offset_bottom = 24.0
+text = "B u n n y   f o r m"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EquipStatus" type="Label" parent="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu/DetailsArea"]
+layout_mode = 0
+offset_left = 133.0
+offset_top = 31.0
+offset_right = 262.0
+offset_bottom = 54.0
+text = "Eqipped"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BunnyForm" type="Sprite2D" parent="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu/DetailsArea"]
+position = Vector2(202, 124)
+scale = Vector2(3.15625, 3.21875)
+texture = ExtResource("2_wjnbf")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu/DetailsArea"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 194.0
+offset_right = 378.0
+offset_bottom = 331.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu/DetailsArea/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Description" type="Label" parent="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu/DetailsArea/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "The bunny form is  the defult form. 
+The bunny does not have many benefits,
+ as it can only walk and jump. (The bunny 
+ is cute though :D)"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu/DetailsArea"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 388.0
+offset_right = 387.0
+offset_bottom = 515.0
+text = "You cannot equip multiple forms at a time, and you cannot refund blob points used on forms directly, once you change forms the it will cost the new form's cost subtract the old form's cost*"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Cost" type="Label" parent="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu/DetailsArea"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 314.0
+offset_right = 366.0
+offset_bottom = 337.0
+text = "Price : 0 Blobs"
+label_settings = SubResource("LabelSettings_rrmhj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Equip button" type="Button" parent="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu/DetailsArea"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 345.0
+offset_right = 291.0
+offset_bottom = 378.0
+text = "Equip"
+
+[connection signal="button_up" from="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu/CloseMenuButton" to="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu" method="_on_close_menu_button_button_up"]
+[connection signal="button_up" from="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu/Scroll container/VBoxContainer/BunnyFormButton" to="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu" method="_on_bunny_form_button_button_up"]
+[connection signal="button_up" from="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu/Scroll container/VBoxContainer/StickmanFormButton" to="PLAYER/Camera2D/CanvasLayer/BlobSpendMenu" method="_on_stickman_form_button_button_up"]
