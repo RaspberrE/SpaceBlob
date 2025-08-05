@@ -8,6 +8,15 @@ extends CharacterBody2D
 @export_range(0,1) var decelerate_on_jump_release = 0.5
 
 func _physics_process(delta: float) -> void:
+	
+	if Globalvars.slime_form == "bunny":
+		$StickmanCollision.set_deferred("disabled",true)
+		$BunnyCollision.set_deferred("disabled", false) ########### This code disables the collision or enables
+		
+	if Globalvars.slime_form == "stickman":
+		$StickmanCollision.set_deferred("disabled",false)
+		$BunnyCollision.set_deferred("disabled", true)
+	
 	var direction := Input.get_axis("Left", "Right")
 	# Add the gravity.
 	if not is_on_floor():
@@ -26,6 +35,8 @@ func _physics_process(delta: float) -> void:
 		velocity.y *= decelerate_on_jump_release
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
+	if Input.is_action_just_pressed("SlimeMenu"):
+		$Camera2D/CanvasLayer/BlobSpendMenu.visible = true
 	
 	var speed 
 	if Input.is_action_pressed("Run") and Globalvars.slime_form=="stickman":

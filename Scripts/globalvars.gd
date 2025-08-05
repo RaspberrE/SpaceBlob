@@ -8,7 +8,10 @@ var text = false
 var keys = 0
 var text_contents = "*testing text"
 var slime_form = "bunny"
+var current_form_cost = 0
+var looking_form_cost = 0
 var blob_menu_select = "Bunny"
+var blob_menu_open = false
 var invincibility = Vector2(0,1) #x = starting, y= finished
 var no_grav = false
 
