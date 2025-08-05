@@ -10,12 +10,19 @@ extends CharacterBody2D
 func _physics_process(delta: float) -> void:
 	
 	if Globalvars.slime_form == "bunny":
+		Globalvars.current_form_cost = 0
+		$Sprite2D.texture=load("res://Assets/Bunny_form.png")
 		$StickmanCollision.set_deferred("disabled",true)
 		$BunnyCollision.set_deferred("disabled", false) ########### This code disables the collision or enables
 		
 	if Globalvars.slime_form == "stickman":
+		Globalvars.current_form_cost = 1
+		if Globalvars.changing_forms == true :
+			$".".position.y -= 10
+		$Sprite2D.texture=load("res://Assets/Stickman_form.png")
 		$StickmanCollision.set_deferred("disabled",false)
 		$BunnyCollision.set_deferred("disabled", true)
+		Globalvars.changing_forms = false
 	
 	var direction := Input.get_axis("Left", "Right")
 	# Add the gravity.

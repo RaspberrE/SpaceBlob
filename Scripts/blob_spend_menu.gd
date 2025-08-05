@@ -67,6 +67,7 @@ you to run and wall jump!
 		
 func _on_close_menu_button_button_up() -> void:
 	$".".visible = false
+	$DetailsArea.visible = false
 
 
 func _on_equip_button_button_up() -> void:
@@ -74,8 +75,18 @@ func _on_equip_button_button_up() -> void:
 		pass
 	elif Globalvars.slime_form != Globalvars.blob_menu_select.to_lower():
 		if Globalvars.blob_menu_select == "Stickman" and Globalvars.blob_amount >= Globalvars.looking_form_cost:
+			Globalvars.changing_forms = true
 			Globalvars.slime_form = "stickman"
 			Globalvars.blob_amount += (Globalvars.current_form_cost - Globalvars.looking_form_cost)
+			if Globalvars.slime_form == "stickman":
+				$DetailsArea/EquipStatus.text = "Equipped!"
+				$"DetailsArea/Equip button".text = "Equipped"
+				$"DetailsArea/Equip button".modulate = Color(0,1,0)
+			
 		elif Globalvars.blob_menu_select == "Bunny" and Globalvars.blob_amount >= Globalvars.looking_form_cost:
 			Globalvars.blob_amount += (Globalvars.current_form_cost - Globalvars.looking_form_cost)
 			Globalvars.slime_form = "bunny"
+			if Globalvars.slime_form == "bunny":
+				$DetailsArea/EquipStatus.text = "Equipped!"
+				$"DetailsArea/Equip button".text = "Equipped"
+				$"DetailsArea/Equip button".modulate = Color(0,1,0)
