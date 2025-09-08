@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://du0n62odcwhqk"]
+
+[ext_resource type="Script" path="res://slime_lock.gd" id="1_dsles"]
+[ext_resource type="Texture2D" uid="uid://b57nqb8wejiyx" path="res://Assets/SlimeLock.png" id="2_5o4gc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5uqsq"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lkrl4"]
+size = Vector2(34, 34)
+
+[node name="SlimeLock" type="Node2D"]
+script = ExtResource("1_dsles")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_5o4gc")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D"]
+shape = SubResource("RectangleShape2D_5uqsq")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D/StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D/Area2D"]
+shape = SubResource("RectangleShape2D_lkrl4")

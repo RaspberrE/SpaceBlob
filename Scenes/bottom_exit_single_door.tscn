@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlgwuqjrg6vxc"]
+
+[ext_resource type="Texture2D" uid="uid://c7u73h6gm2ysr" path="res://Assets/One_way_single_doors.png" id="1_wpr55"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_txc41"]
+size = Vector2(33, 10)
+
+[node name="bottom_exit_single_door" type="Node2D"]
+
+[node name="OneWaySingleDoors" type="Sprite2D" parent="."]
+texture = ExtResource("1_wpr55")
+hframes = 4
+frame = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_txc41")

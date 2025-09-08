@@ -24,8 +24,8 @@ func _on_bunny_form_button_button_up() -> void:
 	Globalvars.blob_menu_select = "Bunny"
 	$DetailsArea/FormName.text = "B u n n y   f o r m"
 	$DetailsArea/ScrollContainer/VBoxContainer/Description.text = "The bunny form is  the defult form. 
-The bunny does not have many benefits,
- as it can only walk and jump. (The bunny 
+The bunny has very useful classes,
+ but base bunny it can only walk and jump. (The bunny 
  is cute though :D)"
 	if Globalvars.slime_form == "bunny":
 		$DetailsArea/EquipStatus.text = "Equipped!"

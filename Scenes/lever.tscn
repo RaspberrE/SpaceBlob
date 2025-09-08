@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://bc1j5xm2vwl8i"]
+
+[ext_resource type="Script" path="res://lever.gd" id="1_gerdn"]
+[ext_resource type="Texture2D" uid="uid://dkrj5bw0hudn" path="res://Assets/lever.png" id="2_sdrnb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a88v7"]
+atlas = ExtResource("2_sdrnb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aff4o"]
+atlas = ExtResource("2_sdrnb")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e31m6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a88v7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aff4o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h11p1"]
+radius = 23.0
+
+[node name="Lever" type="Node2D"]
+script = ExtResource("1_gerdn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_e31m6")
+frame_progress = 0.906975
+
+[node name="Area2D" type="Area2D" parent="AnimatedSprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/Area2D"]
+shape = SubResource("CircleShape2D_h11p1")
+
+[node name="Label" type="Label" parent="AnimatedSprite2D"]
+offset_left = -74.0
+offset_top = -44.0
+offset_right = 78.0
+offset_bottom = -21.0
+text = "Press 'E'  to interact"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="AnimatedSprite2D/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="AnimatedSprite2D/Area2D" to="." method="_on_area_2d_body_exited"]

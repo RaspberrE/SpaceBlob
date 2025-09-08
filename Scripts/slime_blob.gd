@@ -13,7 +13,6 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Interact") and player_in_area == true:
 		Globalvars.blob_amount += 1
-		print(Globalvars.blob_amount)
 		queue_free()
 
 
@@ -21,8 +20,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "PLAYER":
 		$Label.visible = true
 		player_in_area = true
-		
-	print(body.name)
+
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.name == "PLAYER":
 		$Label.visible = false
